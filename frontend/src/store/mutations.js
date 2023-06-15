@@ -17,5 +17,8 @@ export default {
         }
       }
     });
+  },
+  LOGIN_FAILURE(state, message) {
+    state.login_failure = message;
   }
 };

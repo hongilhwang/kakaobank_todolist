@@ -107,5 +107,21 @@ export default {
     }
 
     dispatch("getTasks");
+  },
+  // eslint-disable-next-line no-empty-pattern
+  async login({commit}, {id, pw}) {
+
+    const response = await fetch(`/api/login`, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Basic " + new Buffer(id + ":" + pw).toString("base64")
+      }
+    });
+    if (!response.ok) {
+      console.error(response);
+      commit("LOGIN_FAILURE", "패스워드가 잘못 되었거나 알수 없는 이유로 로그인 실패 하였습니다.");
+      return;
+    }
   }
 };

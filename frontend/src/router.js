@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Tasks from "@/views/Tasks.vue";
+import Login from "@/views/Login.vue";
 import NotFound from "@/views/NotFound.vue";
 
 Vue.use(Router);
@@ -9,6 +10,14 @@ const router = new Router({
   mode: "history",
   base: process.env.BASE_URL,
   routes: [
+    {
+      path: "/login",
+      name: "login",
+      component: Login,
+      meta: {
+        title: "login"
+      }
+    },
     {
       path: "/",
       name: "tasks",
