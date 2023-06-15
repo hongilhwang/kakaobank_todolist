@@ -1,0 +1,41 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.0.1'
+}
+
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.azdanov'
+version = '1.0.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.apache.tomcat:tomcat-jdbc'
+    implementation 'org.postgresql:postgresql'
+    runtimeOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'mysql:mysql-connector-java'
+    implementation 'com.github.javafaker:javafaker:1.0.2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    implementation group: 'org.hibernate', name: 'hibernate-core', version: '6.1.4.Final'
+    implementation 'jakarta.servlet:jakarta.servlet-api:6.0.0'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+}
+
+if (project.hasProperty('frontend')) {
+
+    processResources {
+        from('frontend/dist/') {
+            into 'static'
+        }
+    }
+
+    processResources.dependsOn('frontend:npm_run_build')
+}

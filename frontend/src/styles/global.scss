@@ -1,0 +1,36 @@
+@import "variables";
+
+html,
+body {
+  -webkit-font-smoothing: subpixel-antialiased;
+  -moz-osx-font-smoothing: auto;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+input,
+form,
+textarea,
+[type="checkbox"],
+[type="text"] {
+  padding: 0;
+}
+
+p,
+a,
+button {
+  font-size: $font-size;
+}
+
+p,
+a,
+h1,
+h2 {
+  color: $gray-darker;
+}
