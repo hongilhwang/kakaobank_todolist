@@ -6,4 +6,4 @@ ALTER DATABASE todotask
 
 DROP USER IF EXISTS 'todo'@'localhost';
 CREATE USER todo@localhost IDENTIFIED BY '1234';
-GRANT ALL PRIVILEGES ON todotask.* TO todo@localhost IDENTIFIED BY 'todo';
+GRANT ALL PRIVILEGES ON todotask.* TO todo@localhost;
