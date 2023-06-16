@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS user
 (
     id   INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '사용자 번호',
     name VARCHAR(255) NOT NULL UNIQUE COMMENT '사용자 이름',
-    pw   VARCHAR(255) NOT NULL COMMENT '사용자 패스워드'
+    pw   VARCHAR(255) NOT NULL COMMENT '사용자 패스워드',
+    admin BIT(1)      NOT NULL DEFAULT 0 COMMENT '관리자 여부 (1: 관리자, 0: 유저)'
 ) comment '사용자 테이블'
 ENGINE = InnoDB;
