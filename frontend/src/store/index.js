@@ -8,7 +8,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     tasks: [],
-    login_failure: ""
+    login_failure: "",
+    user: null
   },
   mutations,
   actions

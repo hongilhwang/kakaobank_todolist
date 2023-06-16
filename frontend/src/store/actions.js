@@ -1,11 +1,17 @@
 import { parse } from "date-fns";
 
+const getToken = () => {
+  const token = sessionStorage.getItem('token')
+  if (token === null || token === "") location.href = "/login";
+  return { Authentication: `BEARER ${token}` };
+};
+
 export default {
   sortTasks({ state }) {
     state.tasks.sort((a, b) => a.id - b.id);
   },
   async getTasks({ commit, dispatch }) {
-    const response = await fetch("/api/tasks");
+    const response = await fetch("/api/tasks", { headers: getToken() });
     const tasks = await response.json();
     if (!response.ok) {
       console.error(response);
@@ -21,7 +27,7 @@ export default {
     const response = await fetch(`/api/tasks`, {
       method: "post",
       body: JSON.stringify(task),
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json", ...getToken() }
     });
     if (!response.ok) {
       console.error(response);
@@ -36,7 +42,7 @@ export default {
     const response = await fetch(`/api/tasks`, {
       method: "put",
       body: JSON.stringify(task),
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json", ...getToken() }
     });
     if (!response.ok) {
       console.error(response);
@@ -49,7 +55,8 @@ export default {
   },
   async deleteTask({ dispatch }, taskId) {
     const response = await fetch(`/api/tasks/${taskId}`, {
-      method: "delete"
+      method: "delete",
+      headers: getToken()
     });
 
     if (!response.ok) {
@@ -68,7 +75,7 @@ export default {
     const response = await fetch(`/api/tasks/${taskId}/comments`, {
       method: "post",
       body: JSON.stringify(comment),
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json", ...getToken() }
     });
 
     if (!response.ok) {
@@ -84,7 +91,7 @@ export default {
     const response = await fetch(`/api/comments`, {
       method: "put",
       body: JSON.stringify(comment),
-      headers: { "Content-Type": "application/json" }
+      headers: { "Content-Type": "application/json", ...getToken() }
     });
 
     if (!response.ok) {
@@ -98,7 +105,8 @@ export default {
   },
   async deleteComment({ dispatch }, commentId) {
     const response = await fetch(`/api/comments/${commentId}`, {
-      method: "delete"
+      method: "delete",
+      headers: getToken()
     });
 
     if (!response.ok) {
@@ -117,11 +125,16 @@ export default {
         Authorization: "Basic " + new Buffer(id + ":" + pw).toString("base64")
       }
     });
-    console.log(response)
+
     if (!response.ok) {
-      console.error(response);
-      commit("LOGIN_FAILURE", "패스워드가 잘못 되었거나 알수 없는 이유로 로그인 실패 하였습니다.");
+      commit(
+        "LOGIN_FAILURE",
+        "패스워드가 잘못 되었거나 알수 없는 이유로 로그인 실패 하였습니다."
+      );
       return;
     }
+    const payload = await response.json();
+    commit("LOGIN_SUCCESS", payload);
+    location.href = "/";
   }
 };

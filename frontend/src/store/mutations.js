@@ -20,5 +20,10 @@ export default {
   },
   LOGIN_FAILURE(state, message) {
     state.login_failure = message;
+  },
+  LOGIN_SUCCESS(state, loginUser) {
+    state.user = loginUser.user;
+    state.login_failure = "";
+    sessionStorage.setItem("token", loginUser.token);
   }
 };
