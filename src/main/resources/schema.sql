@@ -17,3 +17,13 @@ CREATE TABLE IF NOT EXISTS comment
     date    DATETIME(6)      DEFAULT NULL,
     FOREIGN KEY (task_id) REFERENCES task (id) ON DELETE CASCADE
 ) ENGINE = InnoDB;
+
+
+-- User Table 추가
+CREATE TABLE IF NOT EXISTS user
+(
+    id   INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '사용자 번호',
+    name VARCHAR(255) NOT NULL UNIQUE COMMENT '사용자 이름',
+    pw   VARCHAR(255) NOT NULL COMMENT '사용자 패스워드'
+) comment '사용자 테이블'
+ENGINE = InnoDB;

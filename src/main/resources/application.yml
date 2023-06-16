@@ -14,3 +14,7 @@ spring:
   sql:
     init:
       mode: always
+
+jwt:
+  secret:
+    key: z#D%D*G-KaPdSgTkYp1s5v8y/B?E(H+M

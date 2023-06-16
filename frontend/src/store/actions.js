@@ -108,9 +108,8 @@ export default {
 
     dispatch("getTasks");
   },
-  // eslint-disable-next-line no-empty-pattern
-  async login({commit}, {id, pw}) {
 
+  async login({ commit }, { id, pw }) {
     const response = await fetch(`/api/login`, {
       method: "post",
       headers: {
