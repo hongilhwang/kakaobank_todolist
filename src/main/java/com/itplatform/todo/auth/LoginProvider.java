@@ -12,12 +12,10 @@ import java.util.List;
 public class LoginProvider {
 
     private final UserService userService;
-    private final PasswordEncoder passwordEncoder;
     private final JwtProvider jwtProvider;
 
-    public LoginProvider(UserService userService, PasswordEncoder passwordEncoder, JwtProvider jwtProvider) {
+    public LoginProvider(UserService userService, JwtProvider jwtProvider) {
         this.userService = userService;
-        this.passwordEncoder = passwordEncoder;
         this.jwtProvider = jwtProvider;
     }
 
@@ -30,7 +28,7 @@ public class LoginProvider {
             throw new BadCredentialsException(e.getMessage());
         }
 
-        if (!passwordEncoder.matches(pw, loginUser.getUser().getPw())) {
+        if (!loginUser.getUser().getPw().equals(pw)) {
             throw new BadCredentialsException("패스워드가 잘못 되었습니다.");
         }
 

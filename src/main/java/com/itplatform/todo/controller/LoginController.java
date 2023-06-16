@@ -20,7 +20,7 @@ public class LoginController {
         this.loginProvider = loginProvider;
     }
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     public ResponseEntity<LoginUser> login(@RequestHeader(value = HttpHeaders.AUTHORIZATION) String authorization) {
         String basicAuth64Encoding = authorization.split(" ")[1];
         String basicAuth = new String(Base64.getDecoder().decode(basicAuth64Encoding));

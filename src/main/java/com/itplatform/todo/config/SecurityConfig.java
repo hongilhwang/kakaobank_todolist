@@ -49,8 +49,8 @@ public class SecurityConfig {
                 )
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .requestMatchers( "/login").permitAll()
-                .requestMatchers("/api/comments", "/api/tasks", "/api/tasks").hasRole("USER")
+                .requestMatchers( "/api/login").permitAll()
+                .requestMatchers("/api/comments", "/api/tasks", "/api/tasks").permitAll()//.hasRole("USER")
                 .anyRequest().denyAll()
                 .and()
                 .addFilterBefore(new AuthenticationFilter(jwtProvider), UsernamePasswordAuthenticationFilter.class)
@@ -75,11 +75,6 @@ public class SecurityConfig {
                 });
 
         return http.build();
-    }
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
 }
