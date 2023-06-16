@@ -14,9 +14,9 @@ public record ToDoUserDetails(User user) implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> roles = new ArrayList<>();
-        roles.add(new SimpleGrantedAuthority("USER"));
+        roles.add(new SimpleGrantedAuthority("ROLE_USER"));
         if (user.isAdmin())
-            roles.add(new SimpleGrantedAuthority("ADMIN"));
+            roles.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         return roles;
     }
 
