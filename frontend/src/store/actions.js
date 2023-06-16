@@ -3,7 +3,7 @@ import { parse } from "date-fns";
 const getToken = () => {
   const token = sessionStorage.getItem('token')
   if (token === null || token === "") location.href = "/login";
-  return { Authentication: `BEARER ${token}` };
+  return { Authorization: `BEARER ${token}` };
 };
 
 export default {
