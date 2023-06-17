@@ -134,5 +134,21 @@ export default {
     const payload = await response.json();
     commit("LOGIN_SUCCESS", payload);
     location.href = "/";
+  },
+  async getUsers({ commit }) {
+    const response = await fetch("/api/admin/users", { headers: getToken() });
+
+    checkResponseResult(response);
+    const users = await response.json();
+
+    commit("SAVE_USERS", users);
+  },
+  async updateUser({ dispatch }, user) {
+    const response = await fetch(`/api/admin/users/${user.id}`, {
+      method: "put",
+      headers: { "Content-Type": "application/json", ...getToken() }
+    });
+    checkResponseResult(response);
+    dispatch("getUsers");
   }
 };

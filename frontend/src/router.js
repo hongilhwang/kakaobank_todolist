@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Router from "vue-router";
 import Tasks from "@/views/Tasks.vue";
+import Users from "@/views/Users.vue";
 import Login from "@/views/Login.vue";
 import NotFound from "@/views/NotFound.vue";
 
@@ -22,6 +23,14 @@ const router = new Router({
       path: "/",
       name: "tasks",
       component: Tasks,
+      meta: {
+        title: "Tasks - pawaTask"
+      }
+    },
+    {
+      path: "/users",
+      name: "users",
+      component: Users,
       meta: {
         title: "Tasks - pawaTask"
       }

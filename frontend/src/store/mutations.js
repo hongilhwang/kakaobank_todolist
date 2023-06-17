@@ -25,5 +25,8 @@ export default {
     state.user = loginUser.user;
     state.login_failure = "";
     sessionStorage.setItem("token", loginUser.token);
+  },
+  SAVE_USERS(state, users) {
+    state.users = users;
   }
 };

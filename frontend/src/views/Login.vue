@@ -59,7 +59,7 @@
 <script>
 import Button from "@/components/Button.vue";
 import required from "vuelidate/lib/validators/required";
-import {mapActions, mapState} from "vuex";
+import { mapActions, mapState } from "vuex";
 
 export default {
   components: { Button },
