@@ -3,7 +3,6 @@ package com.itplatform.todo.auth;
 import com.itplatform.todo.domain.LoginUser;
 import com.itplatform.todo.service.UserService;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -31,6 +30,8 @@ public class LoginProvider {
         if (!loginUser.getUser().getPw().equals(pw)) {
             throw new BadCredentialsException("패스워드가 잘못 되었습니다.");
         }
+        loginUser.getUser().setPw("");
+
 
         List<String> roles = new java.util.ArrayList<>(List.of("USER"));
         if (loginUser.getUser().isAdmin())

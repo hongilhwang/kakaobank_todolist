@@ -1,6 +1,6 @@
 import { parse } from "date-fns";
 
-const getToken = () => {
+export const getToken = () => {
   const token = sessionStorage.getItem("token");
   if (token === null || token === "") location.href = "/login";
   return { Authorization: `BEARER ${token}` };
@@ -167,5 +167,14 @@ export default {
     });
     checkResponseResult(response);
     dispatch("getUsers");
+  },
+  async whois({ commit }) {
+    const response = await fetch("/api/me", {
+      headers: { "Content-Type": "application/json", ...getToken() }
+    });
+
+    const user = await response.json();
+
+    commit("LOGIN_SUCCESS", { user, token: sessionStorage.getItem("token") });
   }
 };
