@@ -1,8 +1,12 @@
 <template>
   <div class="body">
+    <Portal v-if="openModal" to="modal">
+      <UserModal :close="() => (openModal = false)"></UserModal>
+    </Portal>
     <main class="main">
       <header class="header">
         <h1 class="title">User list</h1>
+        <Button @click.native.prevent="addUser">Add a new user</Button>
       </header>
       <UserList :users="users"></UserList>
     </main>
@@ -12,14 +16,24 @@
 <script>
 import { mapState } from "vuex";
 import UserList from "@/components/UserList";
+import UserModal from "@/components/Modal/UserModal.vue";
+import Button from "@/components/Button.vue";
 
 export default {
-  components: { UserList },
+  components: { Button, UserModal, UserList },
+  data: function() {
+    return { openModal: false };
+  },
   computed: {
     ...mapState(["users"])
   },
   created() {
     this.$store.dispatch("getUsers");
+  },
+  methods: {
+    addUser() {
+      this.openModal = true;
+    }
   }
 };
 </script>

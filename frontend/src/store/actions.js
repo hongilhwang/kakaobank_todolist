@@ -150,5 +150,22 @@ export default {
     });
     checkResponseResult(response);
     dispatch("getUsers");
+  },
+  async saveUser({ dispatch }, user) {
+    const response = await fetch(`/api/admin/users`, {
+      method: "post",
+      body: JSON.stringify(user),
+      headers: { "Content-Type": "application/json", ...getToken() }
+    });
+    checkResponseResult(response);
+    dispatch("getUsers");
+  },
+  async deleteUser({ dispatch }, id) {
+    const response = await fetch(`/api/admin/users/${id}`, {
+      method: "delete",
+      headers: { "Content-Type": "application/json", ...getToken() }
+    });
+    checkResponseResult(response);
+    dispatch("getUsers");
   }
 };

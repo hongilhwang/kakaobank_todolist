@@ -6,10 +6,16 @@
         <div class="panel__name">{{ user.name }}</div>
         <div class="panel__role">
           <Checkbox
+            :id="`checkbox-${user.id}`"
             v-model="user.admin"
             :name="user.id"
             :on-checked="() => toggleRole(user)"
           />
+        </div>
+        <div class="panel__actions">
+          <Button @click.native.prevent="() => deleteUser(user.id)">
+            <img class="icon" src="../assets/multiply.png" alt="Delete Icon" />
+          </Button>
         </div>
       </div>
     </li>
@@ -19,15 +25,16 @@
 <script>
 import Checkbox from "@/components/Checkbox.vue";
 import { mapActions } from "vuex";
+import Button from "@/components/Button.vue";
 
 export default {
-  components: { Checkbox },
+  components: { Button, Checkbox },
   props: { users: { type: Array, required: true } },
   data: function() {
     return {};
   },
   methods: {
-    ...mapActions(["updateUser"]),
+    ...mapActions(["updateUser", "deleteUser"]),
     toggleRole(user) {
       this.updateUser(user);
     }
@@ -62,6 +69,7 @@ export default {
   width: 100%;
 
   .panel__actions {
+    width: 50px;
     display: flex;
     align-items: center;
   }
@@ -73,7 +81,7 @@ export default {
     width: 100%;
   }
   .panel__role {
-    width: 100px;
+    width: 50px;
   }
 }
 .icon {

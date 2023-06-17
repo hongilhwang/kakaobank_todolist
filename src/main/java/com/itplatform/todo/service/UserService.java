@@ -9,5 +9,9 @@ public interface UserService {
 
     List<User> findAll();
 
+    User save(User user);
+
     User toggleUserRole(String id) throws Exception;
+
+    void delete(String id);
 }
