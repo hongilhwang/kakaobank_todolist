@@ -1,7 +1,7 @@
 import { parse } from "date-fns";
 
 const getToken = () => {
-  const token = sessionStorage.getItem('token')
+  const token = sessionStorage.getItem("token");
   if (token === null || token === "") location.href = "/login";
   return { Authorization: `BEARER ${token}` };
 };
@@ -9,12 +9,12 @@ const getToken = () => {
 const checkResponseResult = (response, exceptionCallback = () => {}) => {
   if (!response.ok) {
     if (response.status === 401) {
-      alert('로그인이 만료되었습니다. 로그인을 다시 시도해주세요.')
-      sessionStorage.removeItem('token');
+      alert("로그인이 만료되었습니다. 로그인을 다시 시도해주세요.");
+      sessionStorage.removeItem("token");
       location.href = "/login";
     }
     if (response.status === 403) {
-      alert('권한이 없는 페이지입니다. 메인페이지로 이동합니다.')
+      alert("권한이 없는 페이지입니다. 메인페이지로 이동합니다.");
       location.href = "/";
     }
     exceptionCallback(response);
