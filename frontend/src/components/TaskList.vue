@@ -22,16 +22,26 @@
       ></CommentModal>
     </Portal>
     <li v-for="(task, index) in tasks" :key="task.id" class="task">
-      <Checkbox
-        v-model="task.status"
-        :name="task.id"
-        :on-checked="() => toggleStatus(task)"
-        >{{ task.title }}</Checkbox
-      >
       <div class="panel">
+        <div v-if="isEdit(task.reporter)" class="panel__check">
+          <Checkbox
+            v-model="task.status"
+            :name="task.id"
+            :on-checked="() => toggleStatus(task)"
+            >{{ task.title }}</Checkbox
+          >
+        </div>
+        <div
+          v-if="!isEdit(task.reporter)"
+          :class="{ panel__title: true, panel__complete: task.status }"
+        >
+          {{ task.title }}
+        </div>
         <div class="panel__date">
-<!--          <img class="icon" src="../assets/calendar.png" alt="Calendar" />-->
           <span class="date">{{ task.dueDate | date }}</span>
+        </div>
+        <div class="panel__reporter">
+          <span class="date">{{ task.reporter }}</span>
         </div>
         <div class="panel__actions">
           <Button @click.native.prevent="() => openModal('show', index)"
@@ -40,7 +50,9 @@
               src="../assets/speech-bubble.png"
               alt="Speech Icon"
           /></Button>
-          <Button @click.native.prevent="() => openModal('edit', index)"
+          <Button
+            v-if="isEdit(task.reporter)"
+            @click.native.prevent="() => openModal('edit', index)"
             ><img class="icon" src="../assets/pencil.png" alt="Pencil"
           /></Button>
         </div>
@@ -50,7 +62,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 import Button from "../components/Button";
 import TaskModal from "../components/Modal/TaskModal";
 import Checkbox from "../components/Checkbox";
@@ -66,6 +78,9 @@ export default {
       selectedTask: 0
     };
   },
+  computed: {
+    ...mapState(["user"])
+  },
   methods: {
     ...mapActions(["completeTask"]),
     toggleStatus(task) {
@@ -78,6 +93,9 @@ export default {
         this.openEditModal = true;
       }
       this.selectedTask = index;
+    },
+    isEdit(name) {
+      return this.user.name === name || this.user.admin;
     }
   }
 };
@@ -104,11 +122,26 @@ export default {
   }
 }
 .panel {
+  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;
 
+  .panel__check {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .panel__title {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+  .panel__complete {
+    color: #bbbbbb;
+  }
   .panel__actions {
+    width: 150px;
     display: flex;
     align-items: center;
   }

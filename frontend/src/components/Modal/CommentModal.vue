@@ -1,5 +1,9 @@
 <template>
-  <ModalBase :close="close" :title="task.title" :action="action">
+  <ModalBase
+    :close="close"
+    :title="task.title"
+    :action="{ ...action, hidden: !isEdit(task.reporter) }"
+  >
     <p class="description">{{ task.description }}</p>
     <div class="meta">
       <p><span class="bold">Date:</span> {{ task.dueDate | date }}</p>
@@ -23,7 +27,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 import ModalBase from "@/components/Modal/BaseModal";
 import Button from "@/components/Button";
 import Comments from "@/components/Comments";
@@ -40,6 +44,9 @@ export default {
       required: false,
       default: () => ({ title: "", callback: () => {} })
     }
+  },
+  computed: {
+    ...mapState(["user"])
   },
   data: function() {
     return {
@@ -64,6 +71,9 @@ export default {
       });
       this.$v.comment.$reset();
       this.comment = "";
+    },
+    isEdit(name) {
+      return this.user.name === name || this.user.admin;
     }
   }
 };

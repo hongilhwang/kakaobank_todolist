@@ -5,7 +5,11 @@
       <header class="header">
         <div class="section">
           <h2 ref="title" class="title" tabindex="-1">{{ title }}</h2>
-          <button class="link action" @click="action.callback">
+          <button
+            v-if="action.hidden === 'undefined' || !action.hidden"
+            class="link action"
+            @click="action.callback"
+          >
             {{ action.title }}
           </button>
         </div>
@@ -27,7 +31,7 @@ export default {
     action: {
       type: Object,
       required: false,
-      default: () => ({ title: "", callback: () => {} })
+      default: () => ({ title: "", hidden: false, callback: () => {} })
     }
   },
   data: function() {

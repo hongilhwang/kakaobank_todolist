@@ -106,4 +106,12 @@ public class Task {
     public void setComments(List<Comment> comments) {
         this.comments = comments;
     }
+
+    public String getReporter() {
+        return reporter;
+    }
+
+    public void setReporter(String reporter) {
+        this.reporter = reporter;
+    }
 }
