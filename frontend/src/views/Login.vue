@@ -11,6 +11,7 @@
                   id="id"
                   v-model.trim="id"
                   type="text"
+                  tabindex="1"
                   :class="{
                     input: true,
                     'input--error': $v.id.$error
@@ -19,7 +20,7 @@
                 />
               </td>
               <td rowspan="2">
-                <Button :class="{ button: true }">Login</Button>
+                <Button tabindex="3" :class="{ button: true }">Login</Button>
               </td>
             </tr>
             <tr>
@@ -27,6 +28,7 @@
               <td>
                 <input
                   id="pw"
+                  tabindex="2"
                   v-model.trim="pw"
                   :class="{
                     input: true,

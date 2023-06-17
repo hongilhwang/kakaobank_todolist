@@ -6,18 +6,32 @@ const getToken = () => {
   return { Authorization: `BEARER ${token}` };
 };
 
+const checkResponseResult = (response, exceptionCallback = () => {}) => {
+  if (!response.ok) {
+    if (response.status === 401) {
+      alert('로그인이 만료되었습니다. 로그인을 다시 시도해주세요.')
+      sessionStorage.removeItem('token');
+      location.href = "/login";
+    }
+    if (response.status === 403) {
+      alert('권한이 없는 페이지입니다. 메인페이지로 이동합니다.')
+      location.href = "/";
+    }
+    exceptionCallback(response);
+    console.error(response);
+    throw Error("서버로 부터 정상적인 응답을 받지 못했습니다.");
+  }
+};
+
 export default {
   sortTasks({ state }) {
     state.tasks.sort((a, b) => a.id - b.id);
   },
   async getTasks({ commit, dispatch }) {
     const response = await fetch("/api/tasks", { headers: getToken() });
-    const tasks = await response.json();
-    if (!response.ok) {
-      console.error(response);
-      return;
-    }
 
+    checkResponseResult(response);
+    const tasks = await response.json();
     tasks.forEach(task => (task.dueDate = parse(task.dueDate)));
 
     commit("SAVE_TASKS", tasks);
@@ -29,10 +43,8 @@ export default {
       body: JSON.stringify(task),
       headers: { "Content-Type": "application/json", ...getToken() }
     });
-    if (!response.ok) {
-      console.error(response);
-      return;
-    }
+
+    checkResponseResult(response);
 
     const taskNew = await response.json();
     commit("UPDATE_TASK", taskNew);
@@ -44,10 +56,8 @@ export default {
       body: JSON.stringify(task),
       headers: { "Content-Type": "application/json", ...getToken() }
     });
-    if (!response.ok) {
-      console.error(response);
-      return;
-    }
+
+    checkResponseResult(response);
 
     const taskNew = await response.json();
     commit("UPDATE_TASK", taskNew);
@@ -59,10 +69,7 @@ export default {
       headers: getToken()
     });
 
-    if (!response.ok) {
-      console.error(response);
-      return;
-    }
+    checkResponseResult(response);
 
     dispatch("getTasks");
   },
@@ -78,10 +85,7 @@ export default {
       headers: { "Content-Type": "application/json", ...getToken() }
     });
 
-    if (!response.ok) {
-      console.error(response);
-      return;
-    }
+    checkResponseResult(response);
 
     const task = await response.json();
     commit("UPDATE_TASK", task);
@@ -94,10 +98,7 @@ export default {
       headers: { "Content-Type": "application/json", ...getToken() }
     });
 
-    if (!response.ok) {
-      console.error(response);
-      return;
-    }
+    checkResponseResult(response);
 
     const commentUpdated = await response.json();
     commit("UPDATE_COMMENT", commentUpdated);
@@ -109,10 +110,7 @@ export default {
       headers: getToken()
     });
 
-    if (!response.ok) {
-      console.error(response);
-      return;
-    }
+    checkResponseResult(response);
 
     dispatch("getTasks");
   },
