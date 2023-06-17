@@ -20,8 +20,7 @@ public class UserController {
 
     @GetMapping("")
     public ResponseEntity<List<User>> getUsers() {
-
-        return new ResponseEntity<>(userService.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(userService.findByDel(false), HttpStatus.OK);
     }
 
     @PutMapping("/{id}")

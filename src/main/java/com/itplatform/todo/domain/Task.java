@@ -38,6 +38,9 @@ public class Task {
     @Column(name = "status")
     private Boolean status;
 
+    @NotNull
+    private String reporter;
+
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "task_id")
     private List<Comment> comments;

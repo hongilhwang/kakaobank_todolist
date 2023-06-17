@@ -14,6 +14,16 @@ public class User {
 
     private boolean admin;
 
+    private boolean del;
+
+    public boolean isDel() {
+        return del;
+    }
+
+    public void setDel(boolean del) {
+        this.del = del;
+    }
+
     public Long getId() {
         return id;
     }

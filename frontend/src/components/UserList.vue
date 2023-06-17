@@ -9,7 +9,7 @@
             :id="`checkbox-${user.id}`"
             v-model="user.admin"
             :name="user.id"
-            :on-checked="() => toggleRole(user)"
+            :on-checked="() => updateUser(user)"
           />
         </div>
         <div class="panel__actions">
@@ -34,10 +34,7 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions(["updateUser", "deleteUser"]),
-    toggleRole(user) {
-      this.updateUser(user);
-    }
+    ...mapActions(["updateUser", "deleteUser"])
   }
 };
 </script>

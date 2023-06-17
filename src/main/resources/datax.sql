@@ -5,6 +5,7 @@ VALUES (1,
         'Nature picture challenge TV. Opportunity recently fight war. Book forward reduce charge.',
         'NORMAL',
         TRUE,
+        'admin',
         '2019-06-06 19:59:17.000000');
 INSERT IGNORE INTO task
 VALUES (2,
@@ -12,6 +13,7 @@ VALUES (2,
         'Campaign others team. Better base everything phone hope. According their leader.',
         'HIGH',
         FALSE,
+        'user1',
         '2019-05-09 05:52:17.000000');
 INSERT IGNORE INTO task
 VALUES (3,
@@ -19,6 +21,7 @@ VALUES (3,
         'Country must form house street when. Already speech finish around. Decade employee art attention physical.',
         'LOW',
         TRUE,
+        'user2',
         '2019-05-19 12:20:17.000000');
 
 INSERT IGNORE INTO comment
@@ -34,4 +37,6 @@ VALUES (5, 'Fifth', 3, '2019-04-01 19:21:17.000000'),
 -- ----------
 -- 유저 테이블 기본 데이터
 -- ----------
-INSERT INTO todotask.user (name, pw, admin) VALUES ('admin', '1234', true)
+INSERT INTO todotask.user (name, pw, admin) VALUES ('admin', '1234', true);
+INSERT INTO todotask.user (name, pw, admin) VALUES ('user1', '1234', false);
+INSERT INTO todotask.user (name, pw, admin) VALUES ('user2', '1234', false);

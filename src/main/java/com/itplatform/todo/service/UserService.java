@@ -7,7 +7,7 @@ import java.util.List;
 public interface UserService {
     User findByName(String name) throws Exception;
 
-    List<User> findAll();
+    List<User> findByDel(boolean del);
 
     User save(User user);
 
