@@ -136,6 +136,7 @@ export default {
     width: 100%;
     display: flex;
     align-items: center;
+    overflow: hidden;
   }
   .panel__complete {
     color: #bbbbbb;
@@ -150,8 +151,16 @@ export default {
     display: none;
   }
 
+  .panel__reporter {
+    display: none;
+  }
+
   @media (min-width: 600px) {
     .panel__date {
+      display: flex;
+      align-items: center;
+    }
+    .panel__reporter {
       display: flex;
       align-items: center;
     }

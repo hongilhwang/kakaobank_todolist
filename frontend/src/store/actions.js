@@ -1,8 +1,9 @@
 import { parse } from "date-fns";
+import router from "@/router";
 
 export const getToken = () => {
   const token = sessionStorage.getItem("token");
-  if (token === null || token === "") location.href = "/login";
+  if (token === null || token === "") router.push("/login");
   return { Authorization: `BEARER ${token}` };
 };
 
@@ -11,11 +12,11 @@ const checkResponseResult = (response, exceptionCallback = () => {}) => {
     if (response.status === 401) {
       alert("로그인이 만료되었습니다. 로그인을 다시 시도해주세요.");
       sessionStorage.removeItem("token");
-      location.href = "/login";
+      router.push("/login");
     }
     if (response.status === 403) {
       alert("권한이 없는 페이지입니다. 메인페이지로 이동합니다.");
-      location.href = "/";
+      router.push("/");
     }
     exceptionCallback(response);
     console.error(response);
@@ -133,7 +134,7 @@ export default {
     }
     const payload = await response.json();
     commit("LOGIN_SUCCESS", payload);
-    location.href = "/";
+    router.push("/");
   },
   async getUsers({ commit }) {
     const response = await fetch("/api/admin/users", { headers: getToken() });

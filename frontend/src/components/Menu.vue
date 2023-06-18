@@ -8,7 +8,13 @@
         </Button>
       </div>
       <div class="right">
-        <Button @click.native.prevent="() => handleGoTo('/users')">유저관리</Button>
+        <Button
+          v-if="user && user.admin"
+          @click.native.prevent="() => handleGoTo('/users')"
+        >
+          유저관리
+        </Button>
+        <Button @click.native.prevent="() => handleLogout()">로그아웃</Button>
       </div>
     </div>
   </div>
@@ -17,13 +23,21 @@
 <script>
 import Button from "../components/Button";
 import router from "@/router";
+import { mapState } from "vuex";
 export default {
-  components: { Button },
   name: "Menu",
+  components: { Button },
   props: {},
+  computed: {
+    ...mapState(["user"])
+  },
   methods: {
     handleGoTo: patch => {
       router.push(patch);
+    },
+    handleLogout: () => {
+      sessionStorage.removeItem("token");
+      router.push("/login");
     }
   }
 };
