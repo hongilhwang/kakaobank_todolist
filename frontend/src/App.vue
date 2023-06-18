@@ -6,7 +6,6 @@
 </template>
 
 <script>
-
 import store from "@/store";
 
 const body = document.querySelector("body");

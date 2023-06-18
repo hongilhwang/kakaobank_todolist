@@ -1,5 +1,6 @@
 <template>
   <div class="body">
+    <Menu></Menu>
     <Portal v-if="openModal" to="modal">
       <TaskModal :close="() => (openModal = false)"></TaskModal>
     </Portal>
@@ -21,9 +22,10 @@ import { mapState } from "vuex";
 import TaskList from "@/components/TaskList";
 import Button from "@/components/Button";
 import TaskModal from "@/components/Modal/TaskModal";
+import Menu from "@/components/Menu.vue";
 
 export default {
-  components: { Button, TaskList, TaskModal },
+  components: {Menu, Button, TaskList, TaskModal },
   data: function() {
     return { openModal: false };
   },

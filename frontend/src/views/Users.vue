@@ -1,5 +1,6 @@
 <template>
   <div class="body">
+    <Menu></Menu>
     <Portal v-if="openModal" to="modal">
       <UserModal :close="() => (openModal = false)"></UserModal>
     </Portal>
@@ -18,9 +19,10 @@ import { mapState } from "vuex";
 import UserList from "@/components/UserList";
 import UserModal from "@/components/Modal/UserModal.vue";
 import Button from "@/components/Button.vue";
+import Menu from "@/components/Menu.vue";
 
 export default {
-  components: { Button, UserModal, UserList },
+  components: {Menu, Button, UserModal, UserList },
   data: function() {
     return { openModal: false };
   },
