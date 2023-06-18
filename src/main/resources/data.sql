@@ -1,4 +1,6 @@
 use todotask;
+
+
 INSERT IGNORE INTO task
 VALUES (1,
         'drive dot-com channels',
@@ -37,6 +39,6 @@ VALUES (5, 'Fifth', 3, '2019-04-01 19:21:17.000000'),
 -- ----------
 -- 유저 테이블 기본 데이터
 -- ----------
-INSERT INTO todotask.user (name, pw, admin) VALUES ('admin', '1234', true);
-INSERT INTO todotask.user (name, pw, admin) VALUES ('user1', '1234', false);
-INSERT INTO todotask.user (name, pw, admin) VALUES ('user2', '1234', false);
+INSERT IGNORE INTO todotask.user (name, pw, admin) VALUES ('admin', '1234', true);
+INSERT IGNORE INTO todotask.user (name, pw, admin) VALUES ('user1', '1234', false);
+INSERT IGNORE INTO todotask.user (name, pw, admin) VALUES ('user2', '1234', false);
