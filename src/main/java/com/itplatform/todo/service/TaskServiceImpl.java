@@ -1,6 +1,7 @@
 package com.itplatform.todo.service;
 
 import com.itplatform.todo.domain.Task;
+import com.itplatform.todo.domain.User;
 import com.itplatform.todo.repository.TaskRepository;
 import java.util.List;
 import java.util.Optional;
@@ -53,17 +54,27 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     @Transactional
-    public Task update(Task task) {
-        if (!taskRepository.existsById(task.getId())) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not updated");
-        }
+    public Task update(Task task, User user) {
+        Task orgTask = taskRepository.findById(task.getId()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Task not updated"));
+
+        if (!orgTask.getReporter().equals(task.getReporter()))
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "잘못된 접근 입니다.");
+
+        if (!(task.getReporter().equals(user.getName()) || user.isAdmin()))
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "수정 권한이 없습니다.");
 
         return taskRepository.save(task);
     }
 
     @Override
     @Transactional
-    public void deleteById(int id) {
+    public void deleteById(int id, User user) {
+
+        Task orgTask = taskRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found task"));
+        if (!(orgTask.getReporter().equals(user.getName()) || user.isAdmin()))
+            throw new ResponseStatusException(HttpStatus.FORBIDDEN, "수정 권한이 없습니다.");
+
         taskRepository.deleteById(id);
     }
+
 }

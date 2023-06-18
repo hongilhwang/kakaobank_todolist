@@ -1,11 +1,13 @@
 package com.itplatform.todo.controller;
 
+import com.itplatform.todo.auth.ToDoUserDetails;
 import com.itplatform.todo.domain.Task;
 import com.itplatform.todo.service.TaskService;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -36,21 +38,21 @@ public class TaskController {
     }
 
     @PostMapping("")
-    public Task addTask(@RequestBody Task task) {
+    public Task addTask(@RequestBody Task task, @AuthenticationPrincipal ToDoUserDetails userDetails) {
+        task.setReporter(userDetails.user().getName());
         return taskService.save(task);
     }
 
     @PutMapping("")
-    public Task updateTask(@RequestBody Task task) {
-        taskService.update(task);
+    public Task updateTask(@RequestBody Task task, @AuthenticationPrincipal ToDoUserDetails userDetails) {
 
-        return task;
+        return taskService.update(task, userDetails.user());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteTask(@PathVariable int id) {
+    public ResponseEntity deleteTask(@PathVariable int id, @AuthenticationPrincipal ToDoUserDetails userDetails) {
 
-        taskService.deleteById(id);
+        taskService.deleteById(id, userDetails.user());
 
         return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
     }

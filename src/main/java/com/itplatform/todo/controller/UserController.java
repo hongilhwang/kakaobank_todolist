@@ -30,7 +30,7 @@ public class UserController {
     }
 
     @PostMapping("")
-    public ResponseEntity<User> updateUser(@RequestBody User user) {
+    public ResponseEntity<User> createUser(@RequestBody User user) {
 
         return new ResponseEntity<>(userService.save(user), HttpStatus.OK);
     }
@@ -38,7 +38,7 @@ public class UserController {
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") String id) {
         userService.delete(id);
-        return new ResponseEntity<>(id, HttpStatus.OK);
+        return new ResponseEntity<>(id, HttpStatus.NO_CONTENT);
     }
 
 }
