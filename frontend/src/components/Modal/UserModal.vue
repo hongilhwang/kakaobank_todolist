@@ -52,7 +52,7 @@
       </select>
       <footer :class="['footer', 'footer--single']">
         <Button :class="{ button: true }" :disabled="$v.validationGroup.$error"
-          >Add a new task</Button
+          >Add a new user</Button
         >
       </footer>
     </form>
