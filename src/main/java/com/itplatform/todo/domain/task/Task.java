@@ -1,16 +1,19 @@
-package com.itplatform.todo.domain;
+package com.itplatform.todo.domain.task;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.Date;
 import java.util.List;
+
+import com.itplatform.todo.domain.task.Comment;
+import com.itplatform.todo.domain.task.Priority;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name = "task")
+@Table(catalog = "todotask", name = "task")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Task {
 

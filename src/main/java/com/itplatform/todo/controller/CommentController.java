@@ -1,6 +1,6 @@
 package com.itplatform.todo.controller;
 
-import com.itplatform.todo.domain.Comment;
+import com.itplatform.todo.domain.task.Comment;
 import com.itplatform.todo.service.CommentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

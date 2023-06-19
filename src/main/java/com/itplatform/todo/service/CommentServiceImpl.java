@@ -1,7 +1,7 @@
 package com.itplatform.todo.service;
 
-import com.itplatform.todo.domain.Comment;
-import com.itplatform.todo.repository.CommentRepository;
+import com.itplatform.todo.domain.task.Comment;
+import com.itplatform.todo.repository.task.CommentRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

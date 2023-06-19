@@ -1,6 +1,6 @@
 package com.itplatform.todo.auth;
 
-import com.itplatform.todo.domain.LoginUser;
+import com.itplatform.todo.domain.user.LoginUser;
 import com.itplatform.todo.service.UserService;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Component;

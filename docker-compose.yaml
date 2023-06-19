@@ -4,9 +4,12 @@ services:
     image: mysql:8
     environment:
       MYSQL_DATABASE: todotask
-      MYSQL_USER: todo
-      MYSQL_PASSWORD: 1234
       MYSQL_ROOT_PASSWORD: 1234
+    entrypoint:
+      sh -c "
+      echo 'CREATE DATABASE IF NOT EXISTS operation;' > /docker-entrypoint-initdb.d/init.sql;
+      /usr/local/bin/docker-entrypoint.sh --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+      "
   frontend:
     build: ./frontend
     volumes:
@@ -29,6 +32,9 @@ services:
       - frontend
     restart: always
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql/todotask?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=1234
+      - SPRING_FIRST-DATASOURCE_JDBCURL=jdbc:mysql://mysql/todotask?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_FIRST-DATASOURCE_USERNAME=root
+      - SPRING_FIRST-DATASOURCE_PASSWORD=1234
+      - SPRING_SECOND-DATASOURCE_JDBCURL=jdbc:mysql://mysql/operation?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      - SPRING_SECOND-DATASOURCE_USERNAME=root
+      - SPRING_SECOND-DATASOURCE_PASSWORD=1234

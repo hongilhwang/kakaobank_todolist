@@ -1,7 +1,7 @@
 package com.itplatform.todo.controller;
 
 import com.itplatform.todo.auth.ToDoUserDetails;
-import com.itplatform.todo.domain.Task;
+import com.itplatform.todo.domain.task.Task;
 import com.itplatform.todo.service.TaskService;
 import java.util.List;
 

@@ -1,7 +1,7 @@
 package com.itplatform.todo.service;
 
-import com.itplatform.todo.domain.Task;
-import com.itplatform.todo.domain.User;
+import com.itplatform.todo.domain.task.Task;
+import com.itplatform.todo.domain.user.User;
 
 import java.util.List;
 

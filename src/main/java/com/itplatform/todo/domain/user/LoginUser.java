@@ -1,4 +1,4 @@
-package com.itplatform.todo.domain;
+package com.itplatform.todo.domain.user;
 
 public class LoginUser {
     private String token;

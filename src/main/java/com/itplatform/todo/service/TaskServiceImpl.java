@@ -1,8 +1,8 @@
 package com.itplatform.todo.service;
 
-import com.itplatform.todo.domain.Task;
-import com.itplatform.todo.domain.User;
-import com.itplatform.todo.repository.TaskRepository;
+import com.itplatform.todo.domain.task.Task;
+import com.itplatform.todo.domain.user.User;
+import com.itplatform.todo.repository.task.TaskRepository;
 import java.util.List;
 import java.util.Optional;
 
@@ -67,7 +67,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    @Transactional
+    @Transactional("taskTransactionManager")
     public void deleteById(int id, User user) {
 
         Task orgTask = taskRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Not found task"));

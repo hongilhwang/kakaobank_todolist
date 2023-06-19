@@ -1,9 +1,10 @@
-package com.itplatform.todo.domain;
+package com.itplatform.todo.domain.user;
 
 
 import jakarta.persistence.*;
 
 @Entity
+@Table(catalog = "operation", name = "user")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,8 +2,8 @@ package com.itplatform.todo.controller;
 
 import com.itplatform.todo.auth.LoginProvider;
 import com.itplatform.todo.auth.ToDoUserDetails;
-import com.itplatform.todo.domain.LoginUser;
-import com.itplatform.todo.domain.User;
+import com.itplatform.todo.domain.user.LoginUser;
+import com.itplatform.todo.domain.user.User;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

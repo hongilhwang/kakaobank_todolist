@@ -1,5 +1,5 @@
 use todotask;
-CREATE TABLE IF NOT EXISTS task
+CREATE TABLE IF NOT EXISTS todotask.task
 (
     id          INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     title       VARCHAR(255)                   DEFAULT NULL,
@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS task
     due_date    DATETIME(6)                    DEFAULT NULL
 ) ENGINE = InnoDB;
 
-CREATE TABLE IF NOT EXISTS comment
+CREATE TABLE IF NOT EXISTS todotask.comment
 (
     id      INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
     text    VARCHAR(255)     DEFAULT NULL,
@@ -19,9 +19,9 @@ CREATE TABLE IF NOT EXISTS comment
     FOREIGN KEY (task_id) REFERENCES task (id) ON DELETE CASCADE
 ) ENGINE = InnoDB;
 
-
+use operation;
 -- User Table 추가
-CREATE TABLE IF NOT EXISTS user
+CREATE TABLE IF NOT EXISTS operation.user
 (
     id   INT(11) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT '사용자 번호',
     name VARCHAR(255) NOT NULL UNIQUE COMMENT '사용자 이름',

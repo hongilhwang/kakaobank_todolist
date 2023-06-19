@@ -1,4 +1,4 @@
-package com.itplatform.todo.domain;
+package com.itplatform.todo.domain.task;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Entity
-@Table(name = "comment")
+@Table(catalog = "todotask", name = "comment")
 public class Comment {
 
     @Id

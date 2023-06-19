@@ -3,8 +3,12 @@ server:
   port: 8080
 
 spring:
-  datasource:
-    url: jdbc:mysql://localhost:3306/todotask?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+  first-datasource:
+    jdbcUrl: jdbc:mysql://localhost:3306/todotask?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+  second-datasource:
+    jdbcUrl: jdbc:mysql://localhost:3306/operation?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
     username: root
     password: 1234
   jpa:

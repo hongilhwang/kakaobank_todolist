@@ -1,7 +1,7 @@
 package com.itplatform.todo.controller;
 
 
-import com.itplatform.todo.domain.User;
+import com.itplatform.todo.domain.user.User;
 import com.itplatform.todo.service.UserService;
 import org.springframework.web.bind.annotation.*;
 

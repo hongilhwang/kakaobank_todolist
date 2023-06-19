@@ -1,6 +1,6 @@
 package com.itplatform.todo.service;
 
-import com.itplatform.todo.domain.Comment;
+import com.itplatform.todo.domain.task.Comment;
 
 public interface CommentService {
 

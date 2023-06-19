@@ -1,8 +1,8 @@
 package com.itplatform.todo.bootstrap;
 
-import com.itplatform.todo.domain.Comment;
-import com.itplatform.todo.domain.Priority;
-import com.itplatform.todo.domain.Task;
+import com.itplatform.todo.domain.task.Comment;
+import com.itplatform.todo.domain.task.Priority;
+import com.itplatform.todo.domain.task.Task;
 import com.itplatform.todo.service.TaskService;
 import com.github.javafaker.Faker;
 import java.util.ArrayList;

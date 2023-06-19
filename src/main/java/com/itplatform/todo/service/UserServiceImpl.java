@@ -1,7 +1,7 @@
 package com.itplatform.todo.service;
 
-import com.itplatform.todo.domain.User;
-import com.itplatform.todo.repository.UserRepository;
+import com.itplatform.todo.domain.user.User;
+import com.itplatform.todo.repository.user.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
