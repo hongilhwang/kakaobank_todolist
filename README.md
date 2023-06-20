@@ -13,7 +13,7 @@
 - Database 생성 방법은 `main/resources` 에서 init.sql 파일을 참고 해주세요. 
 
 ### Run
-
+이 방법으로 구축할때는 데이터베이스를 별도로 생성 해주셔야 됩니다. 생성 방법은 문서 아래를 참고해주세요.
 ```bash
 cd todo-task
 ./gradlew bootRun
@@ -25,6 +25,7 @@ npm run serve
 위의 방법으로 실행 할때는  http://locahost:8081 로 front-end 서버에 접근 하고, http://localhost:8080 으로 back-end 서버에 접근 합니다.
 
 ### Build
+이 방법으로 구축할때는 데이터베이스를 별도로 생성 해주셔야 됩니다. 생성 방법은 문서 아래를 참고해주세요.
 
 ```bash
 ./gradlew clean
@@ -47,3 +48,13 @@ http://localhost:8000/ 로 실행하여 FrontEnd 확인이 가능합니다.
 ## Schema
 
 ![SQL Schema](./screenshots/schema.png)
+
+## 데이터 베이스 생성
+DBMS를 생성 합니다. mysql:8 이상을 권장 합니다.
+```bash
+docker run --name mysql-local -e MYSQL_ROOT_PASSWORD=1234 -d -p 3306:3306 mysql:latest
+```
+이후 mysql에 접근하여 `src/main/resources/init.sql` 파일을 실행 하여 Database를 생성 해줍니다.
+이후, 두가지 방법중 하나의 방법으로 테이블을 생성하고, 데이터를 입력 해주세요.
+* `schema.sql` 실행 후, `data.sql`을 실행하여, 테이블과 초기 데이터를 입력 합니다.
+* `spring.sql.init.mode=always` 활성화로 Application 기동시 `schema.sql`, `data.sql` 파일을 자동 실행 합니다.
