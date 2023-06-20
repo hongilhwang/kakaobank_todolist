@@ -19,6 +19,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByName(name).orElseThrow(() -> new Exception("존재하지 않는 사용자 입니다."));
     }
 
+    @Override
     public User toggleUserRole(String id) throws Exception {
         User user = userRepository.findById(Long.parseLong(id)).orElseThrow(() -> new Exception("존재하지 않는 사용자 입니다."));
         user.setAdmin(!user.isAdmin());
