@@ -1,3 +1,4 @@
+카카오 뱅크 입사 과제로 작성된 프로그램입니다.
 # TodoTask
 
 <small>A simple todo list application that keeps track of your time.</small>
